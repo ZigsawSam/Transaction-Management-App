@@ -11,10 +11,13 @@
         <h1>Transaction Management</h1>
         <div class="nav">
             <button onclick="showSection('add-transaction')">Add Transaction</button>
-            <button onclick="showSection('view-transactions')">View Transactions</button>
+            <button onclick="viewTransactions()">View Transactions</button>
             <button onclick="showSection('edit-transaction')">Edit Transaction</button>
             <button onclick="showSection('delete-transaction')">Delete Transaction</button>
             <button onclick="showSection('view-balance')">View Balance</button>
+            <button onclick="loadTransactions()">Load Transactions</button>
+            <button onclick="deleteAllTransactions()">Delete All Transactions</button>
+            <button onclick="saveTransactions()">Save Transactions</button>
         </div>
 
         <div id="add-transaction" class="section hidden">
