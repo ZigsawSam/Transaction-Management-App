@@ -1,4 +1,4 @@
-let transactions = [];
+let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 
 // Function to show a specific section and hide others
 function showSection(sectionId) {
@@ -12,6 +12,7 @@ function showSection(sectionId) {
 // Initialize by showing the add transaction section when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     showSection('add-transaction');
+    viewTransactions(); // Load existing transactions on page load
 });
 
 // Function to add a transaction
@@ -30,11 +31,16 @@ function addTransaction() {
             index: transactions.length // Simple index based on array length
         };
         transactions.push(newTransaction);
+        localStorage.setItem('transactions', JSON.stringify(transactions)); // Store in localStorage
         clearAddTransactionForm();
         alert("Transaction added successfully!");
+
+        // Focus on the description input field
+        document.getElementById('add-description').focus();
     } else {
         alert("Please fill in all fields.");
     }
+    console.log(transactions); // Check what transactions are being added
 }
 
 // Function to clear the add transaction form
@@ -56,6 +62,7 @@ function viewTransactions() {
         transactionsList.appendChild(li);
     });
 
+    console.log("Viewing Transactions: ", transactions); // Check if transactions are being viewed
     showSection('view-transactions');
 }
 
@@ -69,6 +76,7 @@ function editTransaction() {
 
     if (index >= 0 && index < transactions.length && description && amount && type && date) {
         transactions[index] = { description, amount, type, date, index };
+        localStorage.setItem('transactions', JSON.stringify(transactions)); // Update localStorage
         alert("Transaction updated successfully!");
         clearEditTransactionForm();
     } else {
@@ -91,8 +99,10 @@ function deleteTransaction() {
     
     if (index >= 0 && index < transactions.length) {
         transactions.splice(index, 1); // Remove the transaction
+        localStorage.setItem('transactions', JSON.stringify(transactions)); // Update localStorage
         alert("Transaction deleted successfully!");
         clearDeleteTransactionForm();
+        viewTransactions(); // Refresh the transaction list
     } else {
         alert("Invalid index.");
     }
@@ -110,4 +120,29 @@ function displayBalance() {
     }, 0);
 
     document.getElementById('balance-display').textContent = `Current Balance: $${balance.toFixed(2)}`;
+}
+// Function to load all transactions from localStorage
+function loadTransactions() {
+    const storedTransactions = JSON.parse(localStorage.getItem('transactions'));
+    if (storedTransactions) {
+        transactions = storedTransactions;
+        alert("Transactions loaded successfully!");
+        viewTransactions(); // Refresh the transaction list
+    } else {
+        alert("No transactions found.");
+    }
+}
+
+// Function to delete all transactions
+function deleteAllTransactions() {
+    transactions = [];
+    localStorage.removeItem('transactions'); // Clear localStorage
+    alert("All transactions deleted successfully!");
+    viewTransactions(); // Refresh the transaction list
+}
+
+// Function to save all transactions
+function saveTransactions() {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+    alert("Transactions saved successfully!");
 }
