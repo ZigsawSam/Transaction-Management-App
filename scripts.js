@@ -149,3 +149,21 @@ function saveTransactions() {
     localStorage.setItem('transactions', JSON.stringify(transactions));
     alert("Transactions saved successfully!");
 }
+
+
+// Function to download transactions as PDF
+function downloadTransactionsPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(16);
+    doc.text('Transaction Report', 10, 10);
+
+    doc.setFontSize(12);
+    transactions.forEach((transaction, index) => {
+        const text = `${index + 1}. ${transaction.description} - Rs.${transaction.amount} (${transaction.type}) on ${transaction.date}`;
+        doc.text(text, 10, 20 + (index * 10)); // Adjust Y position for each line
+    });
+
+    doc.save('transactions.pdf');
+}
