@@ -56,6 +56,9 @@ function viewTransactions() {
     const transactionsList = document.getElementById('transactions-list');
     transactionsList.innerHTML = ''; // Clear existing list
 
+    // Sort transactions by date
+    transactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+
     transactions.forEach(transaction => {
         const li = document.createElement('li');
         li.textContent = `${transaction.description} - $${transaction.amount} (${transaction.type}) on ${transaction.date}`;
