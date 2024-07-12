@@ -14,6 +14,7 @@ h1 {
 
 .nav {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 20px;
 }
@@ -22,15 +23,18 @@ button {
     background-color: #1E1E1E;
     color: #FFFFFF;
     border: none;
-    padding: 10px 20px;
-    margin: 0 10px;
+    padding: 10px 15px;
+    margin: 5px;
     cursor: pointer;
     border-radius: 5px;
     font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
 button:hover {
     background-color: #3D3D3D;
+    transform: scale(1.05); /* Slightly increase size */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Add shadow */
 }
 
 .section {
@@ -42,4 +46,21 @@ button:hover {
 
 .hidden {
     display: none;
+}
+
+/* Specific styles for transaction list */
+#transactions-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#transactions-list li {
+    padding: 8px;
+    border-bottom: 1px solid #444;
+}
+
+/* Balance display */
+#balance-display {
+    font-weight: bold;
+    margin-top: 10px;
 }
