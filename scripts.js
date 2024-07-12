@@ -61,7 +61,7 @@ function viewTransactions() {
 
     transactions.forEach(transaction => {
         const li = document.createElement('li');
-        li.textContent = `${transaction.description} - $${transaction.amount} (${transaction.type}) on ${transaction.date}`;
+        li.textContent = `${transaction.description} - Rs.${transaction.amount} (${transaction.type}) on ${transaction.date}`;
         transactionsList.appendChild(li);
     });
 
@@ -122,7 +122,7 @@ function displayBalance() {
         return transaction.type === 'Credit' ? total + transaction.amount : total - transaction.amount;
     }, 0);
 
-    document.getElementById('balance-display').textContent = `Current Balance: $${balance.toFixed(2)}`;
+    document.getElementById('balance-display').textContent = `Current Balance: Rs.${balance.toFixed(2)}`;
 }
 // Function to load all transactions from localStorage
 function loadTransactions() {
